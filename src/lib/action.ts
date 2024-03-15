@@ -20,9 +20,11 @@ const FormSchema = z.object({
   destination: z.string().url(), // 校验为有效的 URL
   title: z.string().optional(), // 可选字段
   backHalf: z.string()
-              .regex(/^[a-zA-Z0-9-_]*$/) // 只允许字母数字以及短横线和下划线
-              .max(32)// 最大长度限制为32
-              .optional(), //可选
+      .min(0) // 允许为空
+      .max(32) // 最大长度限制为32
+      .refine(value => value === '' || /^[a-zA-Z0-9_-]{4,32}$/.test(value), {
+        message: 'Must be a string of 4 to 32 characters consisting of letters, numbers, _, or -',
+      }), // 自定义校验规则
 });
 
 export async function createLink(formData: FormData) {

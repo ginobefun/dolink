@@ -1,62 +1,37 @@
-'use client'
-
-import { useState } from 'react';
 import { Input } from "@/components/ui/input";
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { createLink } from '@/lib/action';
 
 export default function Component() {
-  const [destination, setDestination] = useState('');
-  const [title, setTitle] = useState('');
-  const [domain, setDomain] = useState('dol.ink'); // 默认域名
-  const [backHalf, setBackHalf] = useState('');
-
-  const handleCreateShortLink = async (e: any) => {
-    e.preventDefault();
-    // TODO: 在这里处理表单提交事件，如发送到 API
-    console.log(destination, title, domain, backHalf);
-  };
-
   return (
     <div className="max-w-2xl mx-auto my-8 p-6 bg-white rounded-md shadow">
       <h1 className="text-2xl font-bold mb-6">Create new</h1>
-      <form onSubmit={handleCreateShortLink}>
+      <form action={createLink}>
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1" htmlFor="destination">
             Destination
           </label>
-          <Input id="destination" placeholder="https://example.com/my-long-url" type="url" value={destination} onChange={(e) => setDestination(e.target.value)} />
+          <Input id="destination" name="destination" placeholder="https://example.com/my-long-url" type="url" />
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1" htmlFor="title">
             Title (optional)
           </label>
-          <Input id="title" placeholder="" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <Input id="title" name="title" placeholder="" type="text" />
         </div>
-
-        <hr className="mb-6" />
         <div className="mb-4">
-          <h2 className="text-lg font-semibold mb-4">Ways to share</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1" htmlFor="domain">
                 Domain
               </label>
-              <Select value={domain} onValueChange={setDomain}>
-                <SelectTrigger id="domain">
-                  <SelectValue placeholder="dol.ink" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="dol.ink">dol.ink</SelectItem>
-                  <SelectItem value="f2rcc">f2r.cc</SelectItem>
-                </SelectContent>
-              </Select>
+              <Input id="domain" type="text" disabled value="dol.ink/" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1" htmlFor="back-half">
+              <label className="block text-sm font-medium mb-1" htmlFor="backHalf">
                 Custom back-half (optional)
               </label>
-              <Input id="back-half" placeholder="/" type="text" value={backHalf} onChange={(e) => setBackHalf(e.target.value)} />
+              <Input id="backHalf" name="backHalf" placeholder="abc" type="text" />
             </div>
           </div>
 

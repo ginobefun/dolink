@@ -5,21 +5,16 @@ import { notFound } from "next/navigation";
 
 export default async function LinkPage({ params }: { params: { backHalf: string } }) {
     const { backHalf } = params;
-    console.log(backHalf);
     const link = await getLink(backHalf);
-    console.log(link);
     if (!link) {
         return notFound();
     }
 
     const url = new URL(link.destination);
     const domain = url.hostname;
-
     return (
         <div className="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
             <div className="flex items-center justify-between mb-4">
-
-
                 <h1 className="text-2xl font-semibold">{domain} – {link.title || 'untitled'}</h1>
                 <div className="flex space-x-2">
                     <Button variant="ghost">

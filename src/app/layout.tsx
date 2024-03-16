@@ -7,10 +7,41 @@ import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const meta = {
+  title: 'DoLink - URL Shortener and Share',
+  description: 'A simple URL shortener and share tools by dol.ink',
+  image: "https://dol.ink/logo.png",
+}
+
 export const metadata: Metadata = {
-  title: "DoLink - URL Shortener | dol.ink",
-  description: "A simple URL shortener by dol.ink",
-};
+  title: {
+    default: meta.title,
+    template: '%s | DoLink - URL Shortener and Share',
+  },
+  description: meta.description,
+  openGraph: {
+    title: meta.title,
+    description: meta.description,
+    url: "https://dol.ink/",
+    siteName: meta.title,
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: meta.image,
+      },
+    ],
+  },
+  twitter: {
+    title: meta.title,
+    description: meta.description,
+    images: meta.image,
+    card: 'summary_large_image',
+  },
+  alternates: {
+    canonical: "https://dol.ink/",
+  },
+}
 
 export default function RootLayout({
   children,

@@ -26,6 +26,12 @@ const CreateLinkReq = z.object({
 
 export async function POST(req: NextRequest) {
     try {
+        const xForwardedFor = req.headers.get('x-forwarded-for');
+        const ip = xForwardedFor ? xForwardedFor.split(',')[0].trim() : req.ip;
+        const userAgent = req.headers.get('user-agent')
+        const language = req.headers.get('accept-language');
+        console.log('uaParser', ip, userAgent, language);
+
         const data = await req.json();
         console.log('createLink', data);
         const parsedData = CreateLinkReq.parse(data);

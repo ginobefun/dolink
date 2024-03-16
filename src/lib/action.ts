@@ -53,7 +53,7 @@ export async function createLink(formData: FormData) {
     },
   });
 
-  redirect('/link/'+parsedData.backHalf);
+  redirect('/link/'+backHalf);
 }
 
 export async function getLink(backHalf: string) {

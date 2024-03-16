@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getLink } from '@/lib/action';
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function LinkPage({ params }: { params: { backHalf: string } }) {
@@ -12,39 +13,28 @@ export default async function LinkPage({ params }: { params: { backHalf: string 
 
     const url = new URL(link.destination);
     const domain = url.hostname;
+
     return (
-        <div className="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
+        <div className="max-w-4xl mx-auto my-10 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl border-t-2 border-gray-100">
             <div className="flex items-center justify-between mb-4">
                 <h1 className="text-2xl font-semibold">{domain} – {link.title || 'untitled'}</h1>
-                <div className="flex space-x-2">
-                    <Button variant="ghost">
-                        <CopyIcon className="text-gray-600" />
-                    </Button>
-                    <Button variant="ghost">
-                        <FileEditIcon className="text-gray-600" />
-                    </Button>
-                    <Button variant="ghost">
-                        <ShareIcon className="text-gray-600" />
-                    </Button>
-                    <Button variant="ghost">
-                        <MoreHorizontalIcon className="text-gray-600" />
-                    </Button>
-                </div>
             </div>
             <div className="flex items-center space-x-4 mb-4">
-                <p className="text-gray-600 truncate">
+                <p className="text-gray-600 dark:text-gray-400 truncate">
                     {link.destination}
                 </p>
             </div>
             <div className="flex items-center space-x-4 mb-4">
-                <Badge variant="secondary">dol.ink/{backHalf}</Badge>
+                <Link href={"/" + backHalf} className="text-blue-500 hover:underline">
+                    dol.ink/{backHalf}
+                </Link>
             </div>
             <div className="flex items-center space-x-4 mb-6">
-                <CalendarIcon className="text-gray-600" />
-                <p className="text-gray-600">{new Date(link.createdAt).toLocaleString()}</p>
+                <p className="text-gray-600 dark:text-gray-400">{new Date(link.createdAt).toLocaleString()}</p>
             </div>
         </div>
-    )
+    );
+
 }
 
 

@@ -31,7 +31,7 @@ export default function Component() {
               <label className="block text-sm font-medium mb-1" htmlFor="backHalf">
                 Custom back-half (optional)
               </label>
-              <Input id="backHalf" name="backHalf" placeholder="abc" type="text" />
+              <Input id="backHalf" name="backHalf" placeholder="abcd" type="text" />
             </div>
           </div>
           <Button type="submit" className="mt-4">Create Short Link</Button>

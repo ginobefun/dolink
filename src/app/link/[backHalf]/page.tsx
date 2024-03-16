@@ -1,5 +1,3 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { getLink } from '@/lib/action';
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -11,13 +9,10 @@ export default async function LinkPage({ params }: { params: { backHalf: string 
         return notFound();
     }
 
-    const url = new URL(link.destination);
-    const domain = url.hostname;
-
     return (
         <div className="max-w-4xl mx-auto my-10 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl border-t-2 border-gray-100">
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-2xl font-semibold">{domain} – {link.title || 'untitled'}</h1>
+                <h1 className="text-2xl font-semibold">{link.title || 'untitled'}</h1>
             </div>
             <div className="flex items-center space-x-4 mb-4">
                 <p className="text-gray-600 dark:text-gray-400 truncate">
@@ -34,7 +29,6 @@ export default async function LinkPage({ params }: { params: { backHalf: string 
             </div>
         </div>
     );
-
 }
 
 

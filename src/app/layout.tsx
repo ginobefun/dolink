@@ -4,13 +4,14 @@ import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { domain } from "@/lib/constant";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const meta = {
-  title: 'DoLink - URL Shortener and Share',
-  description: 'A simple URL shortener and share tools by dol.ink',
-  image: "https://dol.ink/logo.png",
+  title: 'DoLink - URL Shortener and Share Tools',
+  description: 'A simple URL shortener and share tools.',
+  image: domain + "logo.png",
 }
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: meta.title,
     description: meta.description,
-    url: "https://dol.ink/",
+    url: domain,
     siteName: meta.title,
     locale: 'en_US',
     type: 'website',
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
   },
   alternates: {
-    canonical: "https://dol.ink/",
+    canonical: domain,
   },
 }
 

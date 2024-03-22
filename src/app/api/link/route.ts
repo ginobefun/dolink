@@ -3,6 +3,7 @@
 import { z } from 'zod';
 import { NextResponse, NextRequest } from 'next/server';
 import prisma from '@/lib/prisma';
+import { auth } from '@clerk/nextjs';
 
 const GENERATE_LENGTH: number = 5;
 const MAX_ATTEMPTS = 10;
@@ -26,6 +27,14 @@ const CreateLinkReq = z.object({
 
 export async function POST(req: NextRequest) {
     try {
+        // Get the userId from auth() -- if null, the user is not signed in
+        const { userId,user } = auth();
+        if (!userId || !user) {
+            return NextResponse.redirect(new URL('/sign-in',req.url))
+        }
+
+        console.log('userId', userId, user);
+
         const xForwardedFor = req.headers.get('x-forwarded-for');
         const ip = xForwardedFor ? xForwardedFor.split(',')[0].trim() : req.ip;
         const userAgent = req.headers.get('user-agent')

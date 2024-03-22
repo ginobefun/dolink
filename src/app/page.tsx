@@ -34,6 +34,9 @@ export default function Component() {
       const result = await response.json();
       console.log('create link result', result);
       if (!response.ok) {
+        if (response.status === 401) {
+          router.push('/login');
+        }
         throw new Error(result.message || 'An error occurred');
       } else {
         // Maybe reset form here or set a success state
